@@ -34,6 +34,7 @@ def register(request):
                     'hobby': profile.hobby,
                     'phone': profile.phone,
                     'postalCode': profile.postalCode,
+                    'image': profile.image.url if profile.image else None
                 }, status=201)
             except Exception as e:
                 return JsonResponse({'error': str(e)}, status=500)

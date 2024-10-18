@@ -20,7 +20,8 @@ class UserRegistrationForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     address = forms.CharField(required=True)
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = UserProfile
-        fields = ['address', 'agreement', 'city', 'cnic', 'comment', 'dob', 'gender', 'hobby', 'phone', 'postalCode']
+        fields = ['address', 'agreement', 'city', 'cnic', 'comment', 'dob', 'gender', 'hobby', 'phone', 'postalCode','image']

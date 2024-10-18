@@ -14,6 +14,7 @@ class UserProfile(models.Model):
     hobby = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
     postalCode = models.CharField(max_length=10)
+    image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
