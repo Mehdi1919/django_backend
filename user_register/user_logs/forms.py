@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
 
 class UserRegistrationForm(forms.ModelForm):
@@ -25,3 +26,15 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['address', 'agreement', 'city', 'cnic', 'comment', 'dob', 'gender', 'hobby', 'phone', 'postalCode','image']
+
+    def clean(self):
+        cleaned_data =  super().clean()
+        
+        fields_clean = ['address', 'agreement', 'city', 'cnic', 'comment', 'dob', 'gender', 'hobby', 'phone', 'postalCode']
+        
+        for field in fields_clean:
+            value = cleaned_data.get(field)
+            if value and str(value).startswith('-'):
+                self.add_error(field,"Cannot start from negative!")
+                
+        return cleaned_data
